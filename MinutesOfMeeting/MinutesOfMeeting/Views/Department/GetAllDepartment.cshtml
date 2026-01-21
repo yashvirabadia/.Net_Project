@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model IEnumerable<MinutesOfMeeting.Models.DepartmentModel>
+
+@{
+    ViewData["Title"] = "Department";
+    var departments = Model ?? Enumerable.Empty<MinutesOfMeeting.Models.DepartmentModel>();
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Departments</h3>
+        <a asp-controller="Department" asp-action="AddEdit" class="btn btn-primary">
+            + Add Department
+        </a>
+    </div>
+
+    <table class="table table-bordered table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Department Name</th>
+                <th width="180">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 1;
+                foreach (var r in departments)
+                {
+                    <tr>
+                        <td>@(i++)</td>
+                        <td>@r.departmentName</td>
+                        <td>
+                            <a asp-controller="Department"
+                               asp-action="AddEdit"
+                               asp-route-id="@r.departmentID"
+                               class="btn btn-sm btn-warning me-1">
+                                Edit
+                            </a>
+
+                            <a asp-controller="Department"
+                               asp-action="Delete"
+                               asp-route-id="@r.departmentID"
+                               class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
